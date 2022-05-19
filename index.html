@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="movieSearch.js" defer></script>
+
+</head>
+<p id="history"></p>
+<h1>OMDB Search Forms</h1>
+    <fieldset id="sbt_fieldset">
+        <legend>By Title:</legend>
+
+        <label>Title</label>
+        <input type="text" id="t" placeholder="IMDb Title">
+
+        <label>Year</label>
+        <input type="text" id="y" placeholder="Publication Year">
+
+        <label>Plot</label>
+        <select id="sbt_plot">
+            <option value="short" selected>Short</option>
+            <option value="full">Full</option>
+        </select>
+
+        <label>Response</label>
+        <select id="sbt_response">
+            <option value="json" selected>JSON</option>
+            <option value="xml">XML</option>
+        </select>
+
+        <button id="sbt" type="button" onclick="searchMovies(this.id)">Search</button>
+        <button id="sbt_reset" type="button" onclick="resetSBT()">Reset</button>
+    </fieldset>
+
+
+<form id="sbid">
+    <fieldset id="sbid_fieldset">
+        <legend>By ID:</legend>
+
+        <label>ID</label>
+        <input type="text" id="i" placeholder="IMDb ID">
+
+        <label>Plot</label>
+        <select id="sbid_plot">
+            <option value="short" selected>Short</option>
+            <option value="full">Full</option>
+        </select>
+
+        <label>Response</label>
+        <select id="sbid_response">
+            <option value="json" selected>JSON</option>
+            <option value="xml">XML</option>
+        </select>
+
+        <button id="sbid" type="button" onclick="searchMovies(this.id)">Search</button>
+        <button id="sbid_reset" type="button" onclick="resetSBID()">Reset</button>
+    </fieldset>
+</form>
+
+</body>
+
+</html>
