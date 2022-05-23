@@ -1,0 +1,27 @@
+{
+  "name": "movieapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "movieSearch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jrosent/MovieAPI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jrosent/MovieAPI/issues"
+  },
+  "homepage": "https://github.com/jrosent/MovieAPI#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "url": "^0.11.0"
+  }
+}
