@@ -28,6 +28,6 @@ http.createServer(function (req, res) {
             res.end(reqContent);
         });
     }
-}).listen(8008, '172.31.8.151', 3, function() {
+}).listen(8008, function() {
     console.log('I am now ready!');
 });
