@@ -28,6 +28,6 @@ http.createServer(function (req, res) {
             res.end(reqContent);
         });
     }
-}).listen(8008, function() {
+}).listen(8008, 'localhost',3 , function() {
     console.log('I am now ready!');
 });
