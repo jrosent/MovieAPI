@@ -1,10 +1,10 @@
 // Access http://localhost:8080/index.html
-var fs = require('fs');
-var http = require('http');
-var url = require('url');
-var ROOT_DIR = "./";
+const fs = require('fs');
+const http = require('http');
+const url = require('url');
+const ROOT_DIR = "./";
 http.createServer(function (req, res) {
-    var urlObj = url.parse(req.url, true, false);
+    let urlObj = url.parse(req.url, true, false);
     if (req.method == "GET") {
         fs.readFile(ROOT_DIR + urlObj.pathname, function (err,data) {
             if (err) {

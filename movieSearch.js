@@ -7,30 +7,31 @@ async function searchMovies(searchType){
     const endpoint = new URL('http://www.omdbapi.com/?apikey=' + apiKey);
 
     //Get data from previous search 
-    var link = document.getElementById(searchType + '_link');
-    var payload = document.getElementById(searchType + '_payload');
+    let link = document.getElementById(searchType + '_link');
+    let payload = document.getElementById(searchType + '_payload');
 
     //Read information from user input
     setURL(endpoint,searchType);
     writeHistory(endpoint,searchType);
 
     //Fetch data from the omdb API
-    var responseData = await fetch(endpoint.toString());
-    var fieldset = getFieldset(endpoint,searchType);
+    const responseData = await fetch(endpoint.toString());
+    const fieldset = getFieldset(endpoint,searchType);
+    let table;
 
     //Parse data and add it to the search page
     if(endpoint.searchParams.get('r') === 'json'){
-        var data = await responseData.json();
-        var table = createResponse(data,'json','sbt');
+        let data = await responseData.json();
+        table = createResponse(data,'json','sbt');
     }else{
         let txt = await responseData.text();
         const parser = new DOMParser();
         let xml = parser.parseFromString(txt,'application/xml');
-        var table = createResponse(xml, 'xml', 'sbid');
+        table = createResponse(xml, 'xml', 'sbid');
     }
 
     //Create a document element that shows/creates a link to the api without the key
-    var a = document.createElement('a');
+    let a = document.createElement('a');
     a.href = endpoint.toString();
     endpoint.searchParams.delete('apikey');
     a.innerHTML = endpoint.toString();
@@ -69,12 +70,18 @@ async function searchMovies(searchType){
 //Sets the URL for fetching movie data base on search type and user input and saves information to
 //session storage
 function setURL(address,searchType){
+    let title;
+    let year;
+    let plot;
+    let rsp;
+    let id;
+
     if(searchType === "sbt"){
         //Read input from user form    
-        var title = document.getElementById('t').value;
-        var year = document.getElementById('y').value;
-        var plot = document.getElementById('sbt_plot').value;
-        var rsp = document.getElementById('sbt_response').value;
+        title = document.getElementById('t').value;
+        year = document.getElementById('y').value;
+        plot = document.getElementById('sbt_plot').value;
+        rsp = document.getElementById('sbt_response').value;
 
         //Set URL object with input
         if(title !== ''){
@@ -85,9 +92,9 @@ function setURL(address,searchType){
         }
     }
     else{
-        var id = document.getElementById('i').value;
-        var plot = document.getElementById('sbid_plot').value;
-        var rsp = document.getElementById('sbid_response').value;
+        id = document.getElementById('i').value;
+        plot = document.getElementById('sbid_plot').value;
+        rsp = document.getElementById('sbid_response').value;
 
         //Set URL object with input
         if(id !== ''){
@@ -112,7 +119,7 @@ function getFieldset(address,searchType){
 
 //Create the table with response data from obdm API search
 function createResponse(data, type, form){
-    var table = document.createElement('table');
+    let table = document.createElement('table');
     table.setAttribute('id',form + "_table");
 
      if(type === 'json') {
@@ -167,7 +174,7 @@ function createResponse(data, type, form){
         }
     }else if(type === 'xml'){
         const movie = data.getElementsByTagName('movie')[0].attributes;
-        for(var i = 0; i < movie.length; i++){
+        for(let i = 0; i < movie.length; i++){
 
             let tr = document.createElement('tr');
 
@@ -233,13 +240,13 @@ function writeHistory(address,searchType){
 
 //Adds a search history item to the list at the top of the page
 function addHistoryElement(searchType, jsonObj){
-    var history = document.getElementById('history');
+    let history = document.getElementById('history');
 
     let searches = JSON.parse(sessionStorage.getItem('Searches'));
 
     //Check if an arrow should be added to the history list
     if(history.childNodes.length != 0){
-        var arrow = document.createElement('span');
+        let arrow = document.createElement('span');
         arrow.innerHTML = " > ";
         history.appendChild(arrow);
     }
@@ -250,7 +257,7 @@ function addHistoryElement(searchType, jsonObj){
         }
 
     //Create new search history element and add it to the history element    
-    var crumb = document.createElement('a');
+    let crumb = document.createElement('a');
     if(searchType === 'sbt'){
         if(jsonObj.Title !== null){
             crumb.innerHTML = jsonObj.Title;
@@ -288,20 +295,16 @@ function research(index){
     document.getElementById('sbt_response').value = searches[index].Response
 
     let history = document.getElementById('history');
-    console.log(history.childNodes.length);
-    console.log(index);
+    
     while(searches.length > index){
         history.removeChild(history.lastChild);
         history.removeChild(history.lastChild);
         searches.pop();
-        console.log(history.childNodes.length);
     }
 
     sessionStorage.setItem('Searches', JSON.stringify(searches));
 
     searchMovies(type);
-
-    
 }
 
 
@@ -310,7 +313,7 @@ function resetSBT(){
 
     //Check if movie data is present and clear
     if(document.getElementById('sbt_requestTitle') !== null){
-        var f = document.getElementById('sbt_fieldset');
+        let f = document.getElementById('sbt_fieldset');
         f.removeChild(sbt_requestTitle);
         f.removeChild(sbt_link);
         f.removeChild(sbt_responseTitle);
@@ -328,7 +331,7 @@ function resetSBID(){
     
     //Check if movie data is present and clear
     if(document.getElementById('sbid_requestTitle') !== null){
-        var f = document.getElementById('sbid_fieldset');
+        let f = document.getElementById('sbid_fieldset');
         f.removeChild(sbid_requestTitle);
         f.removeChild(sbid_link);
         f.removeChild(sbid_responseTitle);
