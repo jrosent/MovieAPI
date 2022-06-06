@@ -123,7 +123,7 @@ function createResponse(data, type, form){
     table.setAttribute('id',form + "_table");
 
      if(type === 'json') {
-        for (key in data) {
+        for (let key in data) {
             let tr = document.createElement('tr');
 
             let label = document.createElement('td');
@@ -135,12 +135,12 @@ function createResponse(data, type, form){
             if (key === 'Ratings') {
                 let rtable = document.createElement('table');
 
-                for (rObj in data[key]) {
+                for (let rObj in data[key]) {
                     let th = document.createElement('thead');
                     th.innerHTML = rObj;
                     rtable.appendChild(th);
 
-                    for (rkey in data[key][rObj]) {
+                    for (let rkey in data[key][rObj]) {
                         let tr = document.createElement('tr');
                         let rlabel = document.createElement('td');
                         rlabel.innerHTML = rkey;
