@@ -1,8 +1,12 @@
 // Access http://localhost:8080/index.html
+require('dotenv').config();
+
 const fs = require('fs');
 const http = require('http');
 const url = require('url');
 const ROOT_DIR = "./";
+const PORT = process.env.PORT;
+
 http.createServer(function (req, res) {
     let urlObj = url.parse(req.url, true, false);
     if (req.method == "GET") {
@@ -28,6 +32,6 @@ http.createServer(function (req, res) {
             res.end(reqContent);
         });
     }
-}).listen(8008, 'localhost',3 , function() {
+}).listen(PORT, 'localhost',3 , function() {
     console.log('I am now ready!');
 });
