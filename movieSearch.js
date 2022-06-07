@@ -1,4 +1,8 @@
-const apiKey = 'e2f4f3b5&';
+//Read apikey from cookie and delete cookie
+const apiKey = document.cookie.split('=')[1];
+document.cookie ='apikey=; max-age=0';
+
+//const apiKey = 'e2f4f3b5&';
 
 //Main search function to call on search button click
 async function searchMovies(searchType){
@@ -43,7 +47,7 @@ async function searchMovies(searchType){
         payload.innerHTML = '';
         payload.appendChild(table);
     } else{
-        requestTitle = document.createElement('h3');
+        let requestTitle = document.createElement('h3');
         requestTitle.setAttribute('id',searchType + '_requestTitle');
         requestTitle.innerHTML = 'Request:';
 
@@ -51,19 +55,21 @@ async function searchMovies(searchType){
         link.setAttribute('id', searchType + '_link');
         link.appendChild(a);
 
-        responseTitle = document.createElement('h3');
+        let responseTitle = document.createElement('h3');
         responseTitle.setAttribute('id',searchType + '_responseTitle');
         responseTitle.innerHTML = 'Response:';
 
         payload = document.createElement('p');
         payload.setAttribute('id',searchType + '_payload');
         payload.appendChild(table);
+
+        fieldset.appendChild(requestTitle);
+        fieldset.appendChild(link);
+        fieldset.appendChild(responseTitle);
+        fieldset.appendChild(payload);
     }
     
-    fieldset.appendChild(requestTitle);
-    fieldset.appendChild(link);
-    fieldset.appendChild(responseTitle);
-    fieldset.appendChild(payload);
+    
     
 }
 

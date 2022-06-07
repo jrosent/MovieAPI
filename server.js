@@ -6,6 +6,7 @@ const http = require('http');
 const url = require('url');
 const ROOT_DIR = "./";
 const PORT = process.env.PORT;
+const API_COOKIE = 'apikey=' + process.env.API_KEY;
 
 http.createServer(function (req, res) {
     let urlObj = url.parse(req.url, true, false);
@@ -18,7 +19,8 @@ http.createServer(function (req, res) {
             }
             res.writeHead(200, {
                 'Content-Type': 'text/html',
-                'Access-Control-Allow-Origin': '*'
+                'Access-Control-Allow-Origin': '*',
+                'Set-Cookie': API_COOKIE
             });
             res.end(data);
         });
